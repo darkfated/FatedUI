@@ -2,7 +2,9 @@ FatedUI = FatedUI or {}
 
 local FileCl = SERVER and AddCSLuaFile or include
 
-resource.AddWorkshop( '2878418292' )
+if ( SERVER ) then
+	resource.AddWorkshop( '2878418292' )
+end
 
 FileCl( 'fated_ui/config.lua' )
 FileCl( 'fated_ui/func.lua' )
