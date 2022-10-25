@@ -33,6 +33,7 @@ local mat_blur = Material( 'pp/blurscreen' )
 
 function FatedUI.func.Blur( panel )
 	local x, y = panel:LocalToScreen( 0, 0 )
+	local scrw, scrh = ScrW(), ScrH()
 
 	surface.SetDrawColor( color_white )
 	surface.SetMaterial( mat_blur )
@@ -43,7 +44,7 @@ function FatedUI.func.Blur( panel )
 
 		render.UpdateScreenEffectTexture()
 
-		surface.DrawTexturedRect( -x, -y, ScrW(), ScrH() )
+		surface.DrawTexturedRect( -x, -y, scrw, scrh )
 	end
 end
 
