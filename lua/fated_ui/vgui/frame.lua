@@ -13,10 +13,9 @@ function ELEMENT:Init()
 		FatedUI.func.Blur( slf )
 
 		draw.RoundedBox( 0, 0, 0, w, h, FatedUI.col.background() )
-	end
-	self.Background.PaintOver = function( slf, w, h )
+
 		surface.SetDrawColor( FatedUI.col.outline )
-		surface.DrawOutlinedRect( 0, -1, w, h + 1 )
+		surface.DrawOutlinedRect( 0, -1, w, h - 5 )
 	end
 
 	self.Header = vgui.Create( 'DPanel', self )
