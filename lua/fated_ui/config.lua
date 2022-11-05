@@ -1,7 +1,7 @@
 // Colors
 
-local convar_header = CreateConVar( 'fated_ui_color_header', 'blue', true )
-local convar_background = CreateConVar( 'fated_ui_color_background', 'light', true )
+local convar_header = CreateClientConVar( 'fated_ui_color_header', 'blue', true )
+local convar_background = CreateClientConVar( 'fated_ui_color_background', 'dark', true )
 
 FatedUI.col = {}
 
