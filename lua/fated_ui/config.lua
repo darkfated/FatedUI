@@ -8,7 +8,7 @@ FatedUI.col = {}
 -- Header
 FatedUI.col.header_table = {
 	[ 'blue' ] = Color(56,129,193),
-	[ 'ted' ] = Color(205,57,57),
+	[ 'red' ] = Color(205,57,57),
 	[ 'green-blue' ] = Color(65,176,163),
 	[ 'purple' ] = Color(127,73,214),
 	[ 'orange' ] = Color(220,123,67),
