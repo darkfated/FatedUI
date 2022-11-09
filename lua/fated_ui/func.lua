@@ -92,7 +92,7 @@ function FatedUI.OpenSettings()
 	menu:MakePopup()
 	menu:SetTitle( 'Settings' )
 
-	local sp = vgui.Create( 'DScrollPanel', menu )
+	local sp = vgui.Create( 'fu-sp', menu )
 	sp:Dock( FILL )
 
 	local function CreateLabelInfo( txt )
