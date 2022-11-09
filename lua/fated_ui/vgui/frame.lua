@@ -6,7 +6,7 @@ local ELEMENT = {}
 function ELEMENT:Init()
 	self:DockPadding( 6, 46, 6, 6 )
 	self.title = 'Окно'
-	self.settings = false
+	self.settings = true
 
 	self.Background = vgui.Create( 'DPanel', self )
 	self.Background.Paint = function( slf, w, h )
@@ -58,6 +58,14 @@ function ELEMENT:Init()
 	self.Title = vgui.Create( 'DPanel', self )
 	self.Title.Paint = function( slf, w, h )
 		draw.SimpleText( self.title, 'fu.26', self:GetWide() * 0.5, h * 0.5, color_header_el, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+
+		if ( !self.settings ) then
+			if ( self.Header.Settings:IsVisible() ) then
+				self.Header.Settings:SetVisible( false )
+			end
+		else
+			self.Header.Settings:SetVisible( true )
+		end
 	end
 end
 
@@ -80,6 +88,10 @@ end
 
 function ELEMENT:SetTitle( text )
 	self.title = text
+end
+
+function ELEMENT:SetSettings( bool )
+	self.settings = bool
 end
 
 vgui.Register( 'fu-frame', ELEMENT, 'EditablePanel' )

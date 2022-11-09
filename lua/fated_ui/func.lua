@@ -90,7 +90,7 @@ function FatedUI.OpenSettings()
 	menu:SetSize( 200, 300 )
 	menu:Center()
 	menu:MakePopup()
-	menu:SetTitle( 'FatedUI Settings' )
+	menu:SetTitle( 'Settings' )
 
 	local sp = vgui.Create( 'DScrollPanel', menu )
 	sp:Dock( FILL )
