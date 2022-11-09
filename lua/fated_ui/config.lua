@@ -55,3 +55,13 @@ FatedUI.col.button_table = {
 FatedUI.col.button = function()
 	return FatedUI.col.button_table[ convar_background:GetString() ]
 end
+
+-- Text
+FatedUI.col.text_table = {
+	[ 'dark' ] = Color(245,245,245),
+	[ 'light' ] = Color(23,23,23),
+}
+
+FatedUI.col.text = function()
+	return FatedUI.col.text_table[ convar_background:GetString() ]
+end

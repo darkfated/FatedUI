@@ -30,10 +30,10 @@ end
 
 local color_white = Color(255,255,255)
 local mat_blur = Material( 'pp/blurscreen' )
+local scrw, scrh = ScrW(), ScrH()
 
 function FatedUI.func.Blur( panel )
 	local x, y = panel:LocalToScreen( 0, 0 )
-	local scrw, scrh = ScrW(), ScrH()
 
 	surface.SetDrawColor( color_white )
 	surface.SetMaterial( mat_blur )
@@ -60,6 +60,23 @@ for fontSize = 14, 30 do
 		outline = false
 	} )
 end
+
+// Test hud
+
+local convar_hud = CreateClientConVar( 'fated_ui_test_hud', 0, true )
+
+hook.Add( 'HUDPaint', 'FatedUI.test', function()
+	if ( !convar_hud:GetBool() ) then
+		return
+	end
+
+	draw.RoundedBox( 6, scrw * 0.5 - 150, 20, 300, 80, FatedUI.col.background() )
+	draw.SimpleText( 'It is impossible to live without this text', 'Default', scrw * 0.5, 40, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+
+	draw.RoundedBoxEx( 6, scrw * 0.5 - 150 + 6, 60, 150 - 6, 40 - 6, FatedUI.col.panel()[ 1 ], false, false, true, false )
+	draw.RoundedBoxEx( 6, scrw * 0.5, 60, 150 - 6, 40 - 6, FatedUI.col.panel()[ 2 ], false, false, false, true )
+	draw.SimpleText( 'Text on panels', 'Default', scrw * 0.5, 77, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+end )
 
 // Settings Menu
 
@@ -123,6 +140,26 @@ concommand.Add( 'fu_test_menu', function()
 	menu:MakePopup()
 	menu:SetTitle( 'Test menu' )
 
+	local btn_test_hud = vgui.Create( 'fu-button', menu )
+	btn_test_hud:Dock( TOP )
+	btn_test_hud:SetTall( 36 )
+	btn_test_hud:Rounded( true, true, false, false )
+	btn_test_hud:SetText( 'Enable/disable test hud' )
+	btn_test_hud.DoClick = function()
+		FatedUI.func.Sound()
+
+		if ( convar_hud:GetBool() ) then
+			RunConsoleCommand( 'fated_ui_test_hud', 0 )
+		else
+			RunConsoleCommand( 'fated_ui_test_hud', 1 )
+		end
+	end
+
+	local split_panel = vgui.Create( 'fu-panel', menu )
+	split_panel:Dock( TOP )
+	split_panel:DockMargin( 0, 6, 0, 6 )
+	split_panel:SetTall( 10 )
+
 	local btn_up = vgui.Create( 'fu-button', menu )
 	btn_up:Dock( TOP )
 	btn_up:SetTall( 40 )
@@ -156,7 +193,6 @@ concommand.Add( 'fu_test_menu', function()
 		pan_color:Dock( TOP )
 		pan_color:DockMargin( 0, 0, 0, 6 )
 		pan_color:SetTall( 40 )
-		pan_color:Color( 1 )
 
 		local pan_inside = vgui.Create( 'fu-panel', pan_color )
 		pan_inside:Dock( FILL )
