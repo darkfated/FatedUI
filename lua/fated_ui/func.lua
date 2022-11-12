@@ -281,7 +281,7 @@ end
 
 // Fonts
 
-for fontSize = 14, 30 do
+for fontSize = 14, 50 do
 	surface.CreateFont( 'fu.' .. fontSize, {
 		font = 'Roboto Regular',
 		size = FatedUI.func.h( fontSize ),
