@@ -10,17 +10,22 @@ function ELEMENT:Init()
 	self.btn_font = 'fu.18'
 	self.standart_color = FatedUI.col.button()
 	self.color = self.standart_color
+	self.active_hover_color = true
 end
 
 local lerp = Lerp
 
 function ELEMENT:Paint(w, h)
-	local fr = FrameTime()
+	if self.active_hover_color then
+		local fr = FrameTime()
 
-	if self:IsHovered() then
-		self.color = Color(lerp(7.5 * fr, self.color.r, FatedUI.col.header().r), lerp(7.5 * fr, self.color.g, FatedUI.col.header().g), lerp(7.5 * fr, self.color.b, FatedUI.col.header().b))
+		if self:IsHovered() then
+			self.color = Color(lerp(7.5 * fr, self.color.r, FatedUI.col.header().r), lerp(7.5 * fr, self.color.g, FatedUI.col.header().g), lerp(7.5 * fr, self.color.b, FatedUI.col.header().b))
+		else
+			self.color = Color(lerp(7.5 * fr, self.color.r, self.standart_color.r), lerp(7.5 * fr, self.color.g, self.standart_color.g), lerp(7.5 * fr, self.color.b, self.standart_color.b))
+		end
 	else
-		self.color = Color(lerp(7.5 * fr, self.color.r, self.standart_color.r), lerp(7.5 * fr, self.color.g, self.standart_color.g), lerp(7.5 * fr, self.color.b, self.standart_color.b))
+		self.color = self.standart_color
 	end
 
 	draw.RoundedBoxEx(8, 0, 0, w, h, FatedUI.col.outline, self.corner1_rounded, self.corner2_rounded, self.corner3_rounded, self.corner4_rounded)
@@ -48,6 +53,10 @@ end
 
 function ELEMENT:SetColor(col)
 	self.standart_color = col
+end
+
+function ELEMENT:SetHoverColor(bool)
+	self.active_hover_color = false
 end
 
 vgui.Register('fu-button', ELEMENT, 'DButton')
