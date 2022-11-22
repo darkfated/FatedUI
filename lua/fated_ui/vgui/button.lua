@@ -8,8 +8,8 @@ function ELEMENT:Init()
 	self.corner4_rounded = false
 	self.btn_text = 'Button'
 	self.btn_font = 'fu.18'
-
-	self.color = Color(FatedUI.col.button().r, FatedUI.col.button().g, FatedUI.col.button().b)
+	self.standart_color = FatedUI.col.button()
+	self.color = self.standart_color
 end
 
 local lerp = Lerp
@@ -20,7 +20,7 @@ function ELEMENT:Paint(w, h)
 	if self:IsHovered() then
 		self.color = Color(lerp(7.5 * fr, self.color.r, FatedUI.col.header().r), lerp(7.5 * fr, self.color.g, FatedUI.col.header().g), lerp(7.5 * fr, self.color.b, FatedUI.col.header().b))
 	else
-		self.color = Color(lerp(7.5 * fr, self.color.r, FatedUI.col.button().r), lerp(7.5 * fr, self.color.g, FatedUI.col.button().g), lerp(7.5 * fr, self.color.b, FatedUI.col.button().b))
+		self.color = Color(lerp(7.5 * fr, self.color.r, self.standart_color.r), lerp(7.5 * fr, self.color.g, self.standart_color.g), lerp(7.5 * fr, self.color.b, self.standart_color.b))
 	end
 
 	draw.RoundedBoxEx(8, 0, 0, w, h, FatedUI.col.outline, self.corner1_rounded, self.corner2_rounded, self.corner3_rounded, self.corner4_rounded)
@@ -44,6 +44,10 @@ end
 
 function ELEMENT:SetFont(font)
 	self.btn_font = font
+end
+
+function ELEMENT:SetColor(col)
+	self.standart_color = col
 end
 
 vgui.Register('fu-button', ELEMENT, 'DButton')
