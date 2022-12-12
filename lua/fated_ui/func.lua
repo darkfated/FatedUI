@@ -137,6 +137,7 @@ concommand.Add('fu_test_menu', function()
 	btn_test_hud:SetTall(FatedUI.func.h(36))
 	btn_test_hud:Rounded(true, true, false, false)
 	btn_test_hud:SetText('Enable/disable test hud')
+	btn_test_hud:SetHoverColor(Color(101,101,184))
 	btn_test_hud.DoClick = function()
 		FatedUI.func.Sound()
 
@@ -173,12 +174,21 @@ concommand.Add('fu_test_menu', function()
 	sp:Dock(TOP)
 	sp:SetTall(FatedUI.func.h(200))
 
-	for l = 1, 15 do
+	for l = 1, 5 do
+		local btn_num = vgui.Create('fu-button', sp)
+		btn_num:Dock(TOP)
+		btn_num:SetTall(FatedUI.func.h(20))
+		btn_num:SetColor(Color(211,90,90))
+		btn_num:SetHoverColor(Color(243,120,120))
+	end
+
+	for l = 1, 10 do
 		local btn_num = vgui.Create('fu-button', sp)
 		btn_num:Dock(TOP)
 		btn_num:SetTall(FatedUI.func.h(40))
 		btn_num:Rounded(true, true, true, true)
 		btn_num:SetText('button #' .. l)
+		btn_num:HoverColor(false)
 	end
 
 	for l = 1, 5 do
@@ -197,6 +207,7 @@ concommand.Add('fu_test_menu', function()
 	local right_panel = vgui.Create('fu-panel', menu)
 	right_panel:Dock(FILL)
 	right_panel:DockMargin(4, 0, 0, 0)
+	right_panel:Radius(24)
 
 	local img_panel = vgui.Create('fu-panel', right_panel)
 	img_panel:SetSize(FatedUI.func.w(200), FatedUI.func.w(200))
