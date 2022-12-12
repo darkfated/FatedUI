@@ -13,6 +13,7 @@ function ELEMENT:Init()
 	self.standart_color = FatedUI.col.button()
 	self.color = self.standart_color
 	self.active_hover_color = true
+	self.hover_color = FatedUI.col.header()
 end
 
 local lerp = Lerp
@@ -22,7 +23,7 @@ function ELEMENT:Paint(w, h)
 		local fr = FrameTime()
 
 		if self:IsHovered() then
-			self.color = Color(lerp(7.5 * fr, self.color.r, FatedUI.col.header().r), lerp(7.5 * fr, self.color.g, FatedUI.col.header().g), lerp(7.5 * fr, self.color.b, FatedUI.col.header().b))
+			self.color = Color(lerp(7.5 * fr, self.color.r, self.hover_color.r), lerp(7.5 * fr, self.color.g, self.hover_color.g), lerp(7.5 * fr, self.color.b, self.hover_color.b))
 		else
 			self.color = Color(lerp(7.5 * fr, self.color.r, self.standart_color.r), lerp(7.5 * fr, self.color.g, self.standart_color.g), lerp(7.5 * fr, self.color.b, self.standart_color.b))
 		end
@@ -57,8 +58,12 @@ function ELEMENT:SetColor(col)
 	self.standart_color = col
 end
 
-function ELEMENT:SetHoverColor(bool)
-	self.active_hover_color = false
+function ELEMENT:HoverColor(bool)
+	self.active_hover_color = bool
+end
+
+function ELEMENT:SetHoverColor(col)
+	self.hover_color = col
 end
 
 vgui.Register('fu-button', ELEMENT, 'DButton')
