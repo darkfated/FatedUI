@@ -22,7 +22,7 @@ function ELEMENT:Init()
 	self.Header.Paint = function(_, w, h)
 		draw.RoundedBoxEx(6, 0, 0, w, h, FatedUI.col.header(), true, true)
 
-		FatedUI.func.ShadowGradient(0, 0, w, h, 1)
+		FatedUI.func.ShadowGradient(0, h * 0.3, w, h * 0.7, 1)
 	end
 
 	self.Header.Close = vgui.Create('DButton', self.Header)
