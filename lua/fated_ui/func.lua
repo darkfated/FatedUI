@@ -172,7 +172,7 @@ concommand.Add('fu_test_menu', function()
 
 	local sp = vgui.Create('fu-sp', main_sp)
 	sp:Dock(TOP)
-	sp:SetTall(FatedUI.func.h(200))
+	sp:SetTall(FatedUI.func.h(300))
 
 	for l = 1, 5 do
 		local btn_num = vgui.Create('fu-button', sp)

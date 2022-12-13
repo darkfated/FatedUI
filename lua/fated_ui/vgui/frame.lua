@@ -1,12 +1,14 @@
 local color_header_el = Color(30,30,30,210)
 local mat_header_close = Material('fated_ui/frame_close.png')
 local mat_header_settings = Material('fated_ui/frame_settings.png')
+local mat_header_fullscreen = Material('fated_ui/frame_fullscreen.png')
 local ELEMENT = {}
 
 function ELEMENT:Init()
 	self:DockPadding(6, 46, 6, 6)
 	self.title = 'Window'
 	self.settings = true
+	self.fullscreen = true
 
 	self.Background = vgui.Create('DPanel', self)
 	self.Background.Paint = function(slf, w, h)
@@ -55,16 +57,43 @@ function ELEMENT:Init()
 		surface.DrawTexturedRect(0, 0, w, h)
 	end
 
+	self.Header.Fullscreen = vgui.Create('DButton', self.Header)
+	self.Header.Fullscreen:Dock(RIGHT)
+	self.Header.Fullscreen:DockMargin(0, 4, 4, 4)
+	self.Header.Fullscreen:SetWide(32)
+	self.Header.Fullscreen:SetText('')
+	self.Header.Fullscreen.DoClick = function()
+		FatedUI.func.Sound()
+
+		if ScrW() != self:GetWide() and ScrH() != self:GetTall() then
+			self.last_wide, self.last_tall = self:GetWide(), self:GetTall()
+
+			self:SetSize(ScrW(), ScrH())
+		else
+			self:SetSize(self.last_wide, self.last_tall)
+		end
+
+		self:Center()
+	end
+	self.Header.Fullscreen.Paint = function(_, w, h)
+		surface.SetMaterial(mat_header_fullscreen)
+		surface.DrawTexturedRect(0, 0, w, h)
+	end
+
 	self.Title = vgui.Create('DPanel', self)
 	self.Title.Paint = function(_, w, h)
 		draw.SimpleText(self.title, 'fu.26', self:GetWide() * 0.5, h * 0.5, color_header_el, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-		if !self.settings then
-			if self.Header.Settings:IsVisible() then
-				self.Header.Settings:SetVisible(false)
+		if IsValid(self.Header.Settings) then
+			if !self.settings then
+				self.Header.Settings:Remove()
 			end
-		else
-			self.Header.Settings:SetVisible(true)
+		end
+
+		if IsValid(self.Header.Fullscreen) then
+			if !self.fullscreen then
+				self.Header.Fullscreen:Remove()
+			end
 		end
 	end
 end
@@ -78,7 +107,7 @@ function ELEMENT:PerformLayout(w, h)
 
 	self.Header:SetSize(w, 40)
 
-	self.Title:SetSize(self:GetWide() - 72, 40)
+	self.Title:SetSize(self:GetWide() - 108, 40)
 end
 
 function ELEMENT:Close()
@@ -91,6 +120,10 @@ end
 
 function ELEMENT:SetSettings(bool)
 	self.settings = bool
+end
+
+function ELEMENT:SetFullscreen(bool)
+	self.fullscreen = bool
 end
 
 vgui.Register('fu-frame', ELEMENT, 'EditablePanel')
