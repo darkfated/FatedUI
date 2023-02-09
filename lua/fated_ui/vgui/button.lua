@@ -36,7 +36,7 @@ function ELEMENT:Paint(w, h)
 end
 
 function ELEMENT:PaintOver(w, h)
-	draw.SimpleText(self.btn_text, self.btn_font, w * 0.5, h * 0.5, self:IsHovered() and color_black or color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText(self.btn_text, self.btn_font, w * 0.5, h * 0.5 - 1, self:IsHovered() and color_black or color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
 function ELEMENT:Rounded(a1, a2, a3, a4)

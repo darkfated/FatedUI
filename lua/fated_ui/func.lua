@@ -59,11 +59,11 @@ hook.Add('HUDPaint', 'FatedUI.test', function()
 
 	-- Adaptive color check
 	draw.RoundedBox(6, scrw * 0.5 - 150, 20, 300, 80, FatedUI.col.background())
-	draw.SimpleText('It is impossible to live without this text', 'Default', scrw * 0.5, 40, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText('It is impossible to live without this text', 'fu.16', scrw * 0.5, 40, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 	draw.RoundedBoxEx(6, scrw * 0.5 - 150 + 6, 60, 150 - 6, 40 - 6, FatedUI.col.panel()[1], false, false, true, false)
 	draw.RoundedBoxEx(6, scrw * 0.5, 60, 150 - 6, 40 - 6, FatedUI.col.panel()[2], false, false, false, true)
-	draw.SimpleText('Text on panels', 'Default', scrw * 0.5, 77, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText('Text on panels', 'fu.16', scrw * 0.5, 77, FatedUI.col.text(), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 	-- Adaptive position
 	draw.RoundedBox(6, FatedUI.func.w(300), FatedUI.func.h(200), FatedUI.func.w(300), FatedUI.func.h(120), color_white)
@@ -86,7 +86,7 @@ function FatedUI.OpenSettings()
 		InfoPanel:Dock(TOP)
 		InfoPanel:SetTall(30)
 		InfoPanel.Paint = function(_, w, h)
-			draw.SimpleText(txt, 'fu.16', w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText(txt, 'fu.16', w * 0.5, h * 0.5 - 1, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end
 	end
 
@@ -289,11 +289,9 @@ end
 
 for fontSize = 14, 50 do
 	surface.CreateFont('fu.' .. fontSize, {
-		font = 'Roboto Regular',
-		size = FatedUI.func.h(fontSize),
-		weight = FatedUI.func.w(300),
+		font = 'Montserrat Medium',
+		size = FatedUI.func.h(fontSize) + 2,
+		weight = FatedUI.func.w(500),
 		extended = true,
-		shadow = false,
-		outline = false,
 	})
 end

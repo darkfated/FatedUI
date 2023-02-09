@@ -82,7 +82,7 @@ function ELEMENT:Init()
 
 	self.Title = vgui.Create('DPanel', self)
 	self.Title.Paint = function(_, w, h)
-		draw.SimpleText(self.title, 'fu.26', self:GetWide() * 0.5, h * 0.5, color_header_el, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(self.title, 'fu.26', self:GetWide() * 0.5, h * 0.5 - 2, color_header_el, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 		if IsValid(self.Header.Settings) then
 			if !self.settings then

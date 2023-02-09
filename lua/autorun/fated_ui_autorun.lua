@@ -3,6 +3,7 @@ FatedUI = FatedUI or {}
 local FileCl = SERVER and AddCSLuaFile or include
 
 if SERVER then
+	resource.AddWorkshop('2924839375') -- Font
 	resource.AddWorkshop('2878418292')
 end
 
