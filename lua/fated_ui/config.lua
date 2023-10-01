@@ -17,7 +17,9 @@ FatedUI.col.header_table = {
 	['green'] = Color(72,174,72),
 }
 FatedUI.col.header = function()
-	return FatedUI.col.header_table[convar_header:GetString()]
+	local header_color = FatedUI.col.header_table[convar_header:GetString()]
+
+	return header_color and header_color or FatedUI.col.header_table['blue']
 end
 
 -- Background
@@ -25,8 +27,16 @@ FatedUI.col.background_table = {
 	['dark'] = Color(0,0,0,120),
 	['light'] = Color(255,255,255,50),
 }
+
+FatedUI.col.ValidTheme = {
+	'dark',
+	'light',
+}
+
 FatedUI.col.background = function()
-	return FatedUI.col.background_table[convar_background:GetString()]
+	local con = convar_background:GetString()
+
+	return FatedUI.col.background_table[table.HasValue(FatedUI.col.ValidTheme, con) and con or 'dark']
 end
 
 -- Outline
@@ -44,7 +54,9 @@ FatedUI.col.panel_table = {
 	},
 }
 FatedUI.col.panel = function()
-	return FatedUI.col.panel_table[convar_background:GetString()]
+	local con = convar_background:GetString()
+
+	return FatedUI.col.panel_table[table.HasValue(FatedUI.col.ValidTheme, con) and con or 'dark']
 end
 
 -- Button
@@ -53,7 +65,9 @@ FatedUI.col.button_table = {
 	['light'] = Color(60,60,60),
 }
 FatedUI.col.button = function()
-	return FatedUI.col.button_table[convar_background:GetString()]
+	local con = convar_background:GetString()
+
+	return FatedUI.col.button_table[table.HasValue(FatedUI.col.ValidTheme, con) and con or 'dark']
 end
 
 -- Text
@@ -63,5 +77,7 @@ FatedUI.col.text_table = {
 }
 
 FatedUI.col.text = function()
-	return FatedUI.col.text_table[convar_background:GetString()]
+	local con = convar_background:GetString()
+
+	return FatedUI.col.text_table[table.HasValue(FatedUI.col.ValidTheme, con) and con or 'dark']
 end

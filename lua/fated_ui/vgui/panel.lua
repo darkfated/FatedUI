@@ -6,7 +6,9 @@ function ELEMENT:Init()
 end
 
 function ELEMENT:Paint(w, h)
-	draw.RoundedBox(self.rad, 0, 0, w, h, FatedUI.col.panel_table[GetConVar( 'fated_ui_color_background'):GetString()][self.color_id])
+	local con = GetConVar( 'fated_ui_color_background'):GetString()
+	
+	draw.RoundedBox(self.rad, 0, 0, w, h, FatedUI.col.panel_table[table.HasValue(FatedUI.col.ValidTheme, con) and con or 'dark'][self.color_id])
 end
 
 function ELEMENT:Color(id)
